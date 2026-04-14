@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #e0f2fe;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 1rem 10%;
+        }
+
+        .navbar .home a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navbar .nav-links li a:hover {
+            background-color: #fff;
+            color: #333;
+            border-radius: 2rem;
+        }
+
+        .fa-user {
+            color: inherit;
+            margin-right: 3px
+        }
+
+        .hero-content {
+            margin-top: 0.5rem;
+            width: 98%;
+            height: 15rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.6), rgba(4, 9, 30, 0.75)), url(https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg);
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero h1 {
+            color: #a5f3fc;
+            font-size: 5rem;
+            transition: opacity 0.3s ease;
+            letter-spacing: 0.5rem;
+        }
+
+        .hero h1:hover {
+            color: transparent;
+            -webkit-text-stroke: 2px #a5f3fc;
+        }
+
+        .hero h3 {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h3 {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="home">
+                <a href="#">HOME</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fa-solid fa-user"></i>Hi, stranger</a></li>
+                <li><a href="#">LOG IN</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Chistev</h1>
+            <h3>A place of my own creation where i can pen down my thoughts</h3>
+        </div>
+    </section>
+
+</body>
+
+</html>
