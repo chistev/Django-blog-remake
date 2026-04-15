@@ -88,10 +88,49 @@
             font-size: 1rem;
         }
 
+        .search-form{
+            margin-top: 0.5rem;
+        }
+
+        .search-container{
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-container input{
+            width: 35%;
+            padding: 1rem;
+            outline: none;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: #0ea5e9; 
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+
+        .search-container button{
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            background-color: #1f2937;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .search-container button:hover{
+            background-color: #334155;
+        }
+
         @media (max-width: 768px) {
             .hero h3 {
                 font-size: 0.9rem;
             }
+            
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -116,6 +155,13 @@
             <h3>A place of my own creation where i can pen down my thoughts</h3>
         </div>
     </section>
+
+    <form class="search-form">
+        <div class="search-container">
+            <input type="search" placeholder="Search for an article...">
+            <button type="submit">Search</button>
+        </div>
+    </form>
 
 </body>
 
