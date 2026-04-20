@@ -129,6 +129,7 @@
         .article-section {
             background-color: #e0f2fe;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin-top: 1rem;
@@ -214,6 +215,51 @@
             color: #0ea5e9;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2.5rem 0 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            padding: 0 1rem;
+            background-color: white;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f1f5f9;
+            color: #0ea5e9;
+            border-color: #e0f2fe;
+        }
+
+        .page-link.active {
+            background-color: #0ea5e9;
+            color: white;
+            font-weight: 600;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+
+        .page-link.prev,
+        .page-link.next {
+            font-weight: 600;
+            padding: 0 1.25rem;
+        }
+
         @media (max-width: 900px) {
             .article-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -227,6 +273,15 @@
 
             .hero h3 {
                 font-size: 0.9rem;
+            }
+
+            .pagination {
+                gap: 0.1rem;
+                flex: wrap;
+            }
+
+            .page-link {
+                font-size: 0.95rem;
             }
 
         }
@@ -344,6 +399,17 @@
             </div>
         </div>
 
+        <div class="pagination">
+            <a href="#" class="page-link prev">← Previous</a>
+
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">5</a>
+
+            <a href="#" class="page-link next">Next →</a>
+        </div>
 
     </section>
 
