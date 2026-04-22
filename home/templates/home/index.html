@@ -260,6 +260,40 @@
             padding: 0 1.25rem;
         }
 
+        footer {
+            background-color: #1e2937;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .footer-section p {
+            margin-top: 1rem;
+            color: #64748b;
+            font-size: 0.95rem;
+
+        }
+
+
         @media (max-width: 900px) {
             .article-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -412,6 +446,19 @@
         </div>
 
     </section>
+
+    <footer>
+        <div class="footer-section">
+            <h4>Connect With Me</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <hr />
+            <p>&copy; 2026 Chistev. All rights reserved.</p>
+        </div>
+    </footer>
+
 
 </body>
 
