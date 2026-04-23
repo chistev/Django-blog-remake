@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background-color: white;
+            margin: 1rem;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .login-container h1 {
+            letter-spacing: 0.5rem;
+            font-size: 3rem;
+            color: #a5f3fc;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(4, 9, 30, 0.85), rgba(4, 9, 30, 0.9)),
+                url('https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg');
+            background-size: cover;
+            background-position: center;
+            flex-direction: column;
+            padding: 2rem;
+            width: 100%;
+            color: white
+        }
+
+        .form-group {
+            margin: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.6rem;
+            color: #334155;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 1.1rem;
+
+        }
+
+        input {
+            padding: 1rem 1rem 1rem 2rem;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+        }
+
+        .login-btn {
+            margin: 1rem;
+            padding: 1.1rem;
+            cursor: pointer;
+            background-color: #1f2937;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            width: 90%;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            background-color: #334155;
+        }
+
+        .or-text {
+            margin: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+
+        .signup-link{
+            margin: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .signup-link a{
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover{
+            text-decoration: underline;
+        }
+
+        .back-to-home{
+            margin: 1.5rem 1rem 1rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .back-to-home a{
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .back-to-home a:hover {
+            color: #0ea5e9;
+        }
+
+        @media (max-width: 900px) {
+            .login-container {
+                margin: 2rem;
+                width: 60%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Chistev</h1>
+            <div
+                style="display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.8rem;">
+                <h3>Welcome back</h3>
+            </div>
+        </div>
+        <div class="login-form">
+            <form>
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Enter your username" required>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+
+                </div>
+
+                <button class="login-btn" type="submit">Log In</button>
+
+            </form>
+
+            <div class="or-text">
+                <span>OR</span>
+            </div>
+
+            <div class="signup-link">
+                Don't have an account?
+                <a href="#">Sign up</a>
+            </div>
+
+            <div class="back-to-home">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
