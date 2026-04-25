@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sean 'Diddy' Combs: Singer Cassie accuses rap mogul of rape and abuse | Chistev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #e0f2fe;
+            line-height: 1.6;
+            color: #1e2937;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 1rem 10%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .home a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .navbar .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .navbar .nav-links li a:hover {
+            background-color: #fff;
+            color: #333;
+            border-radius: 2rem;
+        }
+
+        .article-hero {
+            height: 420px;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.65), rgba(4, 9, 30, 0.75)), 
+                              url('https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+
+        .hero-overlay {
+            padding: 3rem 10%;
+            width: 100%;
+        }
+
+        .article-hero .category {
+            background-color: #0ea5e9;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .article-hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            max-width: 900px;
+        }
+
+        .article-meta {
+            margin-top: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .like-button {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .like-button.liked {
+            color: #ef4444;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .article-body {
+            padding: 2.5rem;
+        }
+
+        .article-body img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .article-body h2 {
+            font-size: 1.8rem;
+            margin: 2.2rem 0 1rem;
+            color: #0f172a;
+        }
+
+        .article-body p {
+            font-size: 1.08rem;
+            margin-bottom: 1.5rem;
+            color: #334155;
+        }
+
+        .article-body blockquote {
+            border-left: 5px solid #0ea5e9;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tag {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .category-section {
+            margin: 3rem auto;
+            max-width: 900px;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .related-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .comments-section {
+            margin: 3rem auto;
+            max-width: 900px;
+            padding: 2rem;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .comments-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .comment {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .comment.replies {
+            margin-left: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+        }
+
+        .comment-date {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .comment-actions {
+            margin-top: 0.8rem;
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .comment-actions span {
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .comment-actions span:hover {
+            color: #0ea5e9;
+        }
+
+        .comment-form {
+            margin-top: 2rem;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: #1e2937;
+            padding: 3rem 10%;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-hero h1 { font-size: 2.4rem; }
+            .content-container { margin: 1.5rem 1rem; padding: 0; }
+            .article-body { padding: 1.8rem 1.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="home">
+                <a href="index.html">HOME</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fa-solid fa-user"></i> Hi, stranger</a></li>
+                <li><a href="login.html">LOG IN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="hero-overlay">
+            <a href="#" class="category">Music &amp; Entertainment</a>
+            <h1>Sean 'Diddy' Combs: Singer Cassie accuses rap mogul of rape and abuse</h1>
+            <div class="article-meta">
+                <div>By Chistev Staff • November 17, 2023 • 8 min read</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-container">
+        <!-- Article Content -->
+        <article class="article-body">
+            <p>Cassie, whose full name is Casandra Ventura, has filed a lawsuit against Sean "Diddy" Combs accusing the music mogul of rape, physical abuse, and emotional manipulation spanning several years.</p>
+            
+            <p>According to court documents filed in New York, the singer claims the abuse began shortly after she started dating Combs in 2007 when she was 19 years old. The lawsuit alleges repeated incidents of sexual assault and physical violence.</p>
+
+            <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="Cassie and Diddy">
+
+            <h2>The Allegations</h2>
+            <p>The lawsuit details multiple disturbing incidents, including an alleged rape in 2018 after Cassie attempted to leave the relationship. Cassie claims Combs subjected her to years of control, including forcing her to participate in sexual activities with others while he watched.</p>
+
+            <blockquote>
+                "I hope that by sharing my story, I can help others who have faced similar situations and encourage them to speak up." — Cassie Ventura
+            </blockquote>
+
+            <p>Combs' representatives have denied all allegations, calling them "baseless and meritless." The music executive has not yet issued a formal public statement regarding the lawsuit.</p>
+
+            <h2>Impact on the Music Industry</h2>
+            <p>This case has sent shockwaves through the hip-hop and entertainment industry. Many artists and industry insiders have begun sharing their own experiences, calling for greater accountability and reform in how power dynamics are handled in the music business.</p>
+
+            <p>The lawsuit comes at a time when the industry is already facing increased scrutiny over sexual misconduct and abuse of power following several high-profile cases in recent years.</p>
+
+            <!-- Like Button -->
+            <div style="margin: 2.5rem 0; padding: 1.2rem 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 1rem;">
+                <span class="like-button" id="likeBtn">
+                    <i class="fa-solid fa-heart" id="heartIcon"></i>
+                    <span id="likeCount">248</span> likes
+                </span>
+            </div>
+
+            <div class="tags">
+                <a href="#" class="tag">#Diddy</a>
+                <a href="#" class="tag">#Cassie</a>
+                <a href="#" class="tag">#MusicIndustry</a>
+                <a href="#" class="tag">#LegalNews</a>
+                <a href="#" class="tag">#HipHop</a>
+            </div>
+        </article>
+    </div>
+
+    <!-- More in Category -->
+    <div class="category-section">
+        <div class="section-header">
+            <h3>More in Music &amp; Entertainment</h3>
+            <a href="#" style="color: #0ea5e9; font-weight: 600; text-decoration: none;">View All Articles →</a>
+        </div>
+        <div class="related-grid">
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 1rem;">
+                    <h4>The Evolution of Hip-Hop in 2025</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
+                </div>
+            </div>
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 1rem;">
+                    <h4>Top 10 Albums You Must Listen To This Year</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">4 min read</p>
+                </div>
+            </div>
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 1rem;">
+                    <h4>Behind the Scenes: Music Awards Drama</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">9 min read</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments-section content-container">
+        <h3><i class="fa-solid fa-comment"></i> 18 Comments</h3>
+
+        <!-- Comment 1 -->
+        <div class="comment">
+            <div class="comment-header">
+                <div class="comment-author">Alex Rivera</div>
+                <div class="comment-date">2 hours ago</div>
+            </div>
+            <p>This is heartbreaking. The music industry really needs more accountability. Cassie is incredibly brave for coming forward.</p>
+            <div class="comment-actions">
+                <span onclick="toggleReply(this)">Reply</span>
+                <span>❤️ 12</span>
+            </div>
+
+            <!-- Reply -->
+            <div class="comment replies">
+                <div class="comment-header">
+                    <div class="comment-author">Jordan Kim</div>
+                    <div class="comment-date">1 hour ago</div>
+                </div>
+                <p>Completely agree. This kind of behavior has been tolerated for far too long.</p>
+                <div class="comment-actions">
+                    <span>❤️ 5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comment 2 -->
+        <div class="comment">
+            <div class="comment-header">
+                <div class="comment-author">Sam Taylor</div>
+                <div class="comment-date">Yesterday</div>
+            </div>
+            <p>Hope the truth comes out fully. No one should have that much power over another person.</p>
+            <div class="comment-actions">
+                <span onclick="toggleReply(this)">Reply</span>
+            </div>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form">
+            <h4>Leave a comment</h4>
+            <textarea id="commentInput" placeholder="What are your thoughts?"></textarea>
+            <button onclick="postComment()" 
+                    style="margin-top: 1rem; padding: 0.9rem 2rem; background: #1f2937; color: white; border: none; border-radius: 9999px; cursor: pointer;">
+                Post Comment
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <h4 style="color: #a5f3fc; margin-bottom: 1rem;">Chistev</h4>
+                <p>A place of my own creation where I can pen down my thoughts.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Connect With Me</h4>
+                <div style="display: flex; gap: 1.5rem; font-size: 1.6rem;">
+                    <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" style="color: white;"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin: 2.5rem 0; border-color: #334155;">
+        <p style="text-align: center; color: #64748b;">&copy; 2026 Chistev. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Like Button
+        const likeBtn = document.getElementById('likeBtn');
+        const heartIcon = document.getElementById('heartIcon');
+        const likeCountEl = document.getElementById('likeCount');
+        let liked = false;
+        let count = 248;
+
+        likeBtn.addEventListener('click', () => {
+            liked = !liked;
+            if (liked) {
+                likeBtn.classList.add('liked');
+                count++;
+            } else {
+                likeBtn.classList.remove('liked');
+                count--;
+            }
+            likeCountEl.textContent = count;
+        });
+
+        // Reply toggle (demo)
+        function toggleReply(el) {
+            alert("Reply functionality will be implemented later.");
+        }
+
+        // Post comment (demo)
+        function postComment() {
+            const input = document.getElementById('commentInput');
+            if (input.value.trim() !== "") {
+                alert("Your comment has been posted! (Demo only)");
+                input.value = "";
+            } else {
+                alert("Please write something before posting.");
+            }
+        }
+    </script>
+</body>
+
+</html>
