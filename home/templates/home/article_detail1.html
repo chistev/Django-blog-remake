@@ -72,7 +72,7 @@
             color: white;
         }
 
-        .hero-content a{
+        .hero-content a {
             background-color: #0ea5e9;
             color: white;
             font-size: 0.9rem;
@@ -93,7 +93,7 @@
             font-size: 1rem;
         }
 
-        .article-container{
+        .article-container {
             background-color: white;
             width: 60%;
             margin: 1rem auto;
@@ -101,29 +101,68 @@
             border-radius: 1rem;
         }
 
-        .article-body p{
+        .article-body p {
             font-size: 1.08rem;
             margin-bottom: 1.5rem;
             color: #334155;
         }
 
+        img {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.2rem 0 1rem;
+            color: #0f172a;
+        }
+
+        blockquote {
+            border-left: 5px solid #0ea5e9;
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            line-height: 1.5rem;
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .like-button {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            padding: 0.5rem;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .fa-thumbs-up {
+            margin-right: 0.5rem;
+        }
+
         @media (max-width:900px) {
-            .hero-content{
+            .hero-content {
                 padding: 1rem;
             }
 
-            .hero h1{
+            .hero h1 {
                 font-size: 1.5rem;
             }
 
-            .article-container{
+            .article-container {
                 width: 90%;
             }
-            body{
+
+            body {
                 background-color: red;
             }
         }
-
     </style>
 </head>
 
@@ -150,9 +189,33 @@
 
     <div class="article-container">
         <article class="article-body">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ab minus ducimus, consectetur modi in culpa. Quos earum ratione, et, corporis saepe recusandae error obcaecati rerum repudiandae dicta eveniet est?</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ab minus ducimus, consectetur modi in
+                culpa. Quos earum ratione, et, corporis saepe recusandae error obcaecati rerum repudiandae dicta eveniet
+                est?</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste facilis, beatae quo officiis consequuntur ducimus voluptatibus cum, sapiente eaque, totam cupiditate ad eos in commodi velit labore! In eos accusantium delectus debitis, provident quas illo possimus aspernatur quae dolores dicta!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste facilis, beatae quo officiis consequuntur
+                ducimus voluptatibus cum, sapiente eaque, totam cupiditate ad eos in commodi velit labore! In eos
+                accusantium delectus debitis, provident quas illo possimus aspernatur quae dolores dicta!</p>
+
+            <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="casie and diddy">
+
+            <h2>The Allegations</h2>
+            <p>The lawsuit details multiple disturbing incidents, including an alleged rape in 2018 after Cassie
+                attempted to leave the relationship. Cassie claims Combs subjected her to years of control, including
+                forcing her to participate in sexual activities with others while he watched.</p>
+
+            <blockquote>
+                "I hope that by sharing my story, I can help others who have faced similar situations and encourage them
+                to speak up." — Cassie Ventura
+            </blockquote>
+
+            <hr>
+
+            <div class="like-button">
+                <button><i class="fa-solid fa-thumbs-up"></i>248 likes</button>
+            </div>
+
+            <hr>
 
         </article>
 
