@@ -146,6 +146,47 @@
             margin-right: 0.5rem;
         }
 
+        .category-section {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+        }
+
+        .section-header {
+            display: flex;
+            width: 60%;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .section-header a {
+            color: #0ea5e9;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            width: 55%;
+            margin: 0 auto;
+        }
+
+        .related-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .related-card:hover{
+            transform: translateY(-6px);
+        }
+
         @media (max-width:900px) {
             .hero-content {
                 padding: 1rem;
@@ -161,6 +202,21 @@
 
             body {
                 background-color: red;
+            }
+
+            .related-grid{
+                grid-template-columns: repeat(2, 1fr);
+                width: 90%;
+            }
+        }
+
+        @media (max-width:768px){
+            .related-grid{
+                grid-template-columns: repeat(1, 1fr);
+                width: 90%;
+            }
+            body{
+                background-color: green;
             }
         }
     </style>
@@ -220,6 +276,43 @@
         </article>
 
     </div>
+    <div class="category-section">
+        <div class="section-header">
+            <h3>More in Music & Entertainment</h3>
+            <a href="#">View All Articles →</a>
+        </div>
+        <div class="related-grid">
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 0 1rem 1rem 1rem;">
+                    <h4>The Evolution of Hip-Hop in 2025</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
+                </div>
+
+            </div>
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 0 1rem 1rem 1rem;">
+                    <h4>The Evolution of Hip-Hop in 2025</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
+                </div>
+
+            </div>
+            <div class="related-card">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div style="padding: 0 1rem 1rem 1rem;">
+                    <h4>The Evolution of Hip-Hop in 2025</h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
+                </div>
+
+            </div>
+            
+
+            
+        </div>
+    </div>
+
+
 
 </body>
 
