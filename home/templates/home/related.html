@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Entertainment - Chistev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #e0f2fe;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 1rem 10%;
+        }
+
+        .navbar .home a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navbar .nav-links li a:hover {
+            background-color: #fff;
+            color: #333;
+            border-radius: 2rem;
+        }
+
+        .fa-user {
+            color: inherit;
+            margin-right: 3px;
+        }
+
+        .hero-content {
+            margin-top: 0.5rem;
+            width: 98%;
+            height: 18rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.8)), 
+                              url('https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content .category-tag {
+            background-color: #0ea5e9;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            color: #a5f3fc;
+            font-size: 3.5rem;
+            letter-spacing: 0.3rem;
+        }
+
+        .hero h3 {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-top: 0.5rem;
+        }
+
+        .article-section {
+            background-color: #e0f2fe;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 2rem 1rem;
+        }
+
+        .results-info {
+            margin: 1.5rem 0 1rem 0;
+            color: #475569;
+            font-size: 1.15rem;
+            width: 80%;
+            text-align: left;
+        }
+
+        .article-container {
+            width: 80%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .article {
+            background-color: white;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 0.5rem;
+            overflow: hidden;
+        }
+
+        .article:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .article img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .article-header {
+            padding: 1.2rem 1.2rem 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .article-header .title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.35;
+            color: #1e2937;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .article-header .title:hover {
+            color: #0ea5e9;
+        }
+
+        .article-header .category {
+            background-color: #0ea5e9;
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            text-decoration: none;
+            white-space: nowrap;
+            margin-top: 2px;
+        }
+
+        .article p {
+            padding: 0 1.2rem 1rem;
+            color: #475569;
+            font-size: 0.97rem;
+            line-height: 1.5;
+        }
+
+        .article-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .article-footer a {
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .article-footer a:hover {
+            color: #0ea5e9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 3rem 0 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            padding: 0 1rem;
+            background-color: white;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f1f5f9;
+            color: #0ea5e9;
+            border-color: #e0f2fe;
+        }
+
+        .page-link.active {
+            background-color: #0ea5e9;
+            color: white;
+            font-weight: 600;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+
+        footer {
+            background-color: #1e2937;
+            padding: 2.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .social-icons {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            font-size: 1.6rem;
+            color: white;
+        }
+
+        .footer-section p {
+            margin-top: 1rem;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1024px) {
+            .article-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                grid-template-columns: 1fr;
+                width: 90%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content {
+                height: 14rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="home">
+                <a href="index.html">HOME</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fa-solid fa-user"></i>Hi, stranger</a></li>
+                <li><a href="login.html">LOG IN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="category-tag">Music &amp; Entertainment</div>
+            <h1>Latest Stories</h1>
+            <h3>Discover the biggest moments, artists, and trends in music and entertainment</h3>
+        </div>
+    </section>
+
+    <section class="article-section">
+        <div class="results-info">
+            <strong>124</strong> articles in <strong>Music &amp; Entertainment</strong>
+        </div>
+
+        <div class="article-container">
+            <!-- Article 1 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="article_detail.html" class="title">Sean 'Diddy' Combs: Singer Cassie accuses rap mogul of rape and abuse</a>
+                    <a href="#" class="category">Music</a>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error est qui ratione sed quos recusandae hic dolorem nobis.</p>
+                <div class="article-footer">
+                    <div>Nov 17, 2023 • 8 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>248</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>18</a>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="#" class="title">The Evolution of Hip-Hop in 2025: New Voices Taking Over</a>
+                    <a href="#" class="category">Hip-Hop</a>
+                </div>
+                <p>From underground artists to mainstream domination, hip-hop continues to evolve with fresh sounds and bold messages.</p>
+                <div class="article-footer">
+                    <div>Apr 28, 2026 • 12 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>142</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>31</a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="#" class="title">Taylor Swift Announces Surprise Double Album Release</a>
+                    <a href="#" class="category">Pop</a>
+                </div>
+                <p>The pop icon continues to break records with her latest announcement that shocked fans worldwide.</p>
+                <div class="article-footer">
+                    <div>Apr 25, 2026 • 6 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>892</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>124</a>
+                </div>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="#" class="title">Kendrick Lamar's Super Bowl Halftime Show: A Cultural Moment</a>
+                    <a href="#" class="category">Events</a>
+                </div>
+                <p>Breaking down the historic performance that had everyone talking for weeks.</p>
+                <div class="article-footer">
+                    <div>Mar 12, 2026 • 9 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>567</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>89</a>
+                </div>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="#" class="title">Billie Eilish Drops New Single "What Was I Made For?" Sequel</a>
+                    <a href="#" class="category">Pop</a>
+                </div>
+                <p>The Oscar-winning artist returns with a deeply emotional follow-up track.</p>
+                <div class="article-footer">
+                    <div>Apr 30, 2026 • 5 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>312</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>67</a>
+                </div>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="article">
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                <div class="article-header">
+                    <a href="#" class="title">Behind the Scenes: How Streaming Changed the Music Industry Forever</a>
+                    <a href="#" class="category">Industry</a>
+                </div>
+                <p>An in-depth look at the business side of modern music and what it means for artists.</p>
+                <div class="article-footer">
+                    <div>Apr 22, 2026 • 15 min read</div>
+                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.4rem;"></i>198</a>
+                    <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.4rem;"></i>42</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="page-link prev">← Previous</a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">5</a>
+            <a href="#" class="page-link next">Next →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h4>Connect With Me</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <hr style="width: 60%; border-color: #334155; margin: 1rem 0;">
+            <p>&copy; 2026 Chistev. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
