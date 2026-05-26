@@ -1,0 +1,70 @@
+{% extends 'home/base.html' %}
+{% block title %}Register - Chistev{% endblock title %}
+    
+{% block content %}
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Chistev</h1>
+            <div
+                style="display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.8rem;">
+                <h3>Join the community</h3>
+            </div>
+        </div>
+        <div class="login-form" style="padding: 1rem;">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="message {% if message.tags %} {{ message.tags }} {% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form method="POST" action="{% url 'account:register' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        {{ form.username }}
+                    </div>
+                    {{ form.username.errors }}
+
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        {{ form.password1 }}
+                    </div>
+                    {{ form.password1.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        {{ form.password2 }}
+                    </div>
+                    {{ form.password2.errors }}
+                </div>
+
+                <button class="login-btn" type="submit">Create Account</button>
+
+            </form>
+
+            <div class="or-text">
+                <span>OR</span>
+            </div>
+
+            <div class="signup-link">
+                Already have an account?
+                <a href="#">Log In</a>
+            </div>
+
+            <div class="back-to-home">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
