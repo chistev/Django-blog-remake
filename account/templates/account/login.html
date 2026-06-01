@@ -1,0 +1,60 @@
+{% extends 'home/base.html' %}
+{% block title %}Login - Chistev{% endblock title %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-header">
+        <h1>Chistev</h1>
+        <div
+            style="display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.8rem;">
+            <h3>Welcome back</h3>
+        </div>
+    </div>
+    <div class="login-form" style="padding: 1rem;">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="message {% if message.tags %} {{ message.tags }} {% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form method="POST" action="{% url 'account:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    {{ form.username }}
+                </div>
+                {{ form.username.errors }}
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    {{ form.password }}
+                </div>
+                {{ form.password.errors }}
+
+            </div>
+
+            <button class="login-btn" type="submit">Log In</button>
+
+        </form>
+
+        <div class="or-text">
+            <span>OR</span>
+        </div>
+
+        <div class="signup-link">
+            Don't have an account?
+            <a href="#">Sign up</a>
+        </div>
+
+        <div class="back-to-home">
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
