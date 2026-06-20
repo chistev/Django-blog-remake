@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% block title %}Login - Chistev{% endblock title %}
+{% block body_class %}login-page{% endblock %}
 
 {% block content %}
 <div class="login-container">
@@ -49,11 +50,11 @@
 
         <div class="signup-link">
             Don't have an account?
-            <a href="#">Sign up</a>
+            <a href="{% url 'account:register'%}">Sign up</a>
         </div>
 
         <div class="back-to-home">
-            <a href="index.html">← Back to Home</a>
+            <a href="{% url 'home' %}">← Back to Home</a>
         </div>
     </div>
 </div>
