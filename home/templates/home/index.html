@@ -40,6 +40,37 @@
 
 <section class="article-section">
     <div class="article-container">
+        {% for article in articles %}
+        <div class="article">
+            {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.title }}">
+            {% elif article.image_url %}
+            <img src="{{ article.image_url }}" alt="{{ article.title }}">
+            {% else %}
+            <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="{{ article.title }}">
+            {% endif %}
+            <div class="article-header">
+                <a href="{{ article.get_absolute_url }}" class="title">{{ article.title }} </a>
+                {% if article.category %}
+                <a href="{{ article.category.get_absolute_url }}" class="category">{{ article.category }}</a>
+                {% endif %}
+            </div>
+            <p>
+                {{ article.content|truncatewords:30}}
+            </p>
+
+            <div class="article-footer">
+                <div>{{ article.published_date|date:"DATETIME_FORMAT" }}</div>
+                <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.5rem;"></i>0</a>
+                <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.5rem;"></i>0 comments</a>
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="article">
+             <p>No articles available yet. Check back soon!</p>
+        </div>
+        {% endfor %}
         <div class="article">
             <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg">
             <div class="article-header">
