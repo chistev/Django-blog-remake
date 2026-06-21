@@ -150,6 +150,13 @@ body {
     background-color: #334155;
 }
 
+/* ===== RESULTS INFO ===== */
+.results-info {
+    margin: 1rem;
+    color: #475569;
+    font-size: 1.1rem;
+}
+
 /* ===== ARTICLES ===== */
 .article-section {
     background-color: #e0f2fe;

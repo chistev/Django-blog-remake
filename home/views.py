@@ -1,6 +1,7 @@
-from django.shortcuts import render
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.shortcuts import render
 from home.models import Article
+from django.db.models import Q
 
 def index(request):
     articles_list = Article.objects.filter(is_published=True)
@@ -25,3 +26,42 @@ def article_detail(request):
 
 def category_detail(request, slug):
     return render(request, 'home/related.html')
+
+def search(request):
+    query = request.GET.get('q', '') # query = '' when no parameter
+    
+    results = []
+    results_count = 0
+    
+    if query:
+        # This searches for articles where ANY condition is true
+        # WITHOUT Q - AND condition (ALL must be true)
+        results = Article.objects.filter(
+            Q(title__icontains=query) | # OR
+            Q(content__icontains=query) | # OR
+            Q(category__name__icontains=query),
+            is_published=True # ← AND condition
+        ).distinct() # WITHOUT .distinct() An article that matches MULTIPLE conditions would appear as many times!
+        
+        results_count = results.count()
+        
+        paginator = Paginator(results, 6)
+        page = request.GET.get('page')
+        
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+    
+    else:
+        articles = []
+        
+    
+    return render(request, 'home/search.html', {
+        'articles':articles,
+        'query':query,
+        'results_count':results_count
+    })
+        
