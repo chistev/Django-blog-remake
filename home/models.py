@@ -26,7 +26,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
     
     def get_absolute_url(self):
-        return reverse('category', args=[self.slug])
+        return reverse('category_detail', args=[self.slug])
 
 class Article(models.Model):
     image = models.ImageField(upload_to='articles/', blank=True, null=True)

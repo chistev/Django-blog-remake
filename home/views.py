@@ -8,5 +8,5 @@ def index(request):
 def article_detail(request):
     return render(request, 'home/article_detail.html')
 
-def category_detail(request):
+def category_detail(request, slug):
     return render(request, 'home/related.html')
