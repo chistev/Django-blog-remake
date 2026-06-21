@@ -250,6 +250,12 @@ body {
     flex-wrap: wrap;
 }
 
+.pagination .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .page-link {
     display: flex;
     align-items: center;

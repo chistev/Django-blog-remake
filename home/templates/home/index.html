@@ -68,22 +68,34 @@
         </div>
         {% empty %}
         <div class="article">
-             <p>No articles available yet. Check back soon!</p>
+            <p>No articles available yet. Check back soon!</p>
         </div>
         {% endfor %}
     </div>
 
+    {% if articles.has_other_pages %}
     <div class="pagination">
-        <a href="#" class="page-link prev">← Previous</a>
+        {% if articles.has_previous %}
+        <a href="?page={{ articles.previous_page_number }}" class="page-link prev">← Previous</a>
+        {% else %}
+        <a href="#" class="page-link prev disabled">← Previous</a>
+        {% endif %}
 
-        <a href="#" class="page-link active">1</a>
-        <a href="#" class="page-link">2</a>
-        <a href="#" class="page-link">3</a>
-        <a href="#" class="page-link">4</a>
-        <a href="#" class="page-link">5</a>
+        {% for num in articles.paginator.page_range %}
+            {% if articles.number == num %}
+                <a href="?page={{ num }}" class="page-link active">{{ num }}</a>
+            {% elif num > articles.number|add:'-3' and num < articles.number|add:'3' %}
+                <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
 
-        <a href="#" class="page-link next">Next →</a>
+        {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}" class="page-link next">Next →</a>
+        {% else %}
+        <a href="#" class="page-link next disabled">Next →</a>
+        {% endif %}
     </div>
+    {% endif %}
 
 </section>
 
