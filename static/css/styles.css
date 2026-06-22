@@ -247,6 +247,82 @@ body {
     color: #0ea5e9;
 }
 
+/* ===== LIKE BUTTON ===== */
+.like-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s ease;
+    color: #64748b;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.like-btn:hover:not([onclick]) {
+    transform: scale(1.1);
+    color: #ef4444;
+}
+
+.like-btn.liked {
+    color: #ef4444;
+}
+
+.like-btn.liked:hover {
+    color: #dc2626;
+}
+
+.like-btn.liked i {
+    animation: heartPop 0.3s ease;
+}
+
+.like-btn i {
+    transition: all 0.2s ease;
+}
+
+.like-count {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Disabled state for non-logged-in users */
+.like-btn[onclick] {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.like-btn[onclick]:hover {
+    color: #0ea5e9;
+}
+
+/* Heart pop animation */
+@keyframes heartPop {
+    0% { 
+        transform: scale(1); 
+    }
+    25% { 
+        transform: scale(1.4); 
+    }
+    50% { 
+        transform: scale(0.9); 
+    }
+    75% { 
+        transform: scale(1.2); 
+    }
+    100% { 
+        transform: scale(1); 
+    }
+}
+
 /* ===== PAGINATION ===== */
 .pagination {
     display: flex;
@@ -531,5 +607,35 @@ input:focus {
     .login-container {
         margin: 2rem;
         width: 60%;
+    }
+}
+
+/* ===== ADDITIONAL RESPONSIVE FOR LIKE BUTTON ===== */
+@media (max-width: 768px) {
+    .article-footer {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+    
+    .like-btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .like-count {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-footer {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+    }
+    
+    .like-btn {
+        font-size: 0.8rem;
+        padding: 0.15rem 0.3rem;
     }
 }

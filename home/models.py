@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -61,4 +62,22 @@ class Article(models.Model):
         # Returns the URL for this article
         # Alternative: reverse('article_detail', kwargs={'slug': self.slug})
         return reverse('article_detail', args=[self.slug])
+    
+    def total_likes(self):
+        return self.likes.count()
 
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        # A user can only like an article once
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'article'],
+                                    name='unique_user_article_like')
+        ]
+        
+    def __str__(self):
+        return f'{self.user} likes {self.article.title}'

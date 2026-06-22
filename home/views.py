@@ -1,6 +1,9 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
-from home.models import Article
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_POST
+from home.models import Article, Like
+from django.http import JsonResponse
 from django.db.models import Q
 
 def index(request):
@@ -18,8 +21,12 @@ def index(request):
     except EmptyPage:
          # If page is out of range, deliver last page of results
         articles = paginator.page(paginator.num_pages)
+        
+    liked_articles = []
+    if request.user.is_authenticated:
+        liked_articles = Like.objects.filter(user=request.user).values_list('article_id', flat=True)
     
-    return render(request, 'home/index.html', {'articles':articles})
+    return render(request, 'home/index.html', {'articles':articles, 'liked_articles': liked_articles})
 
 def article_detail(request):
     return render(request, 'home/article_detail.html')
@@ -58,10 +65,42 @@ def search(request):
     else:
         articles = []
         
+    liked_articles = []
+    if request.user.is_authenticated:
+        liked_articles = Like.objects.filter(user=request.user).values_list('article_id', flat=True)
+    
     
     return render(request, 'home/search.html', {
         'articles':articles,
         'query':query,
-        'results_count':results_count
+        'results_count':results_count,
+        'liked_articles': liked_articles
     })
+    
+@login_required
+@require_POST
+def toggle_like(request):
+    article_id = request.POST.get('article_id')
+    
+    if not article_id:
+        return JsonResponse({'error': 'Article ID is required'}, status=400)
+    
+    article = get_object_or_404(Article, id=article_id)
+    
+    like, created = Like.objects.get_or_create(
+        user=request.user,
+        article=article
+    )
+    
+    if not created:
+        # User already liked it, so unlike it
+        like.delete()
+        liked = False
+    else:
         
+        liked = True
+    
+    return JsonResponse({
+        'liked': liked,
+        'total_likes': article.total_likes()
+    })

@@ -1,4 +1,5 @@
 {% extends "home/base.html" %}
+{% load static %}
 {% block title %}Home - Chistev{% endblock %}
 
 {% block content %}
@@ -61,7 +62,18 @@
                 <p>{{ article.content|truncatewords:30 }}</p>
                 <div class="article-footer">
                     <div>{{ article.published_date|date:"DATETIME_FORMAT" }}</div>
-                    <a href="#"><i class="fa-solid fa-heart" style="margin-right: 0.5rem;"></i>0</a>
+                    <div class="like-container">
+                        <button 
+                            class="like-btn {% if user.is_authenticated and article.id in liked_articles %}liked{% endif %}"
+                            data-article-id="{{ article.id }}"
+                            {% if not user.is_authenticated %}
+                            onclick="window.location.href='{% url 'account:login' %}?next={{ request.path }}'"
+                            {% endif %}
+                        >
+                            <i class="fa-solid fa-heart"></i>
+                            <span class="like-count">{{ article.total_likes }}</span>
+                        </button>
+                    </div>
                     <a href="#"><i class="fa-solid fa-comment" style="margin-right: 0.5rem;"></i>0 comments</a>
                 </div>
             </div>
@@ -111,4 +123,8 @@
         <p>&copy; 2026 Chistev. All rights reserved.</p>
     </div>
 </footer>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'javascript/likes.js' %}"></script>
 {% endblock %}
