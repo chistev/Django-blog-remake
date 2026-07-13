@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
-from home.models import Article, Like
+from home.models import Article, Category, Like
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -32,7 +32,32 @@ def article_detail(request):
     return render(request, 'home/article_detail.html')
 
 def category_detail(request, slug):
-    return render(request, 'home/related.html')
+    category = get_object_or_404(Category, slug=slug)
+    
+    articles_list = Article.objects.filter(category=category, is_published=True)
+    
+    paginator = Paginator(articles_list, 6)
+    page = request.GET.get('page')
+    
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    
+    liked_articles = []
+    if request.user.is_authenticated:
+        liked_articles = Like.objects.filter(user=request.user).values_list('article_id', flat=True)
+    
+    total_articles = articles_list.count()
+    
+    return render(request, 'home/related.html', {
+        'category': category,
+        'articles': articles,
+        'liked_articles': liked_articles,
+        'total_articles': total_articles,
+    })
 
 def search(request):
     query = request.GET.get('q', '') # query = '' when no parameter
