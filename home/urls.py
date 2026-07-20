@@ -7,4 +7,5 @@ urlpatterns = [
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     path('search/', views.search, name='search'),
     path('toggle-like/', views.toggle_like, name='toggle_like'), 
+    path('comment/<int:article_id>/', views.add_comment, name='add_comment'),
 ]

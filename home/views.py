@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.http import require_POST
-from home.models import Article, Category, Like
+from django.contrib import messages
+from home.models import Article, Category, Comment, Like
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -28,8 +29,31 @@ def index(request):
     
     return render(request, 'home/index.html', {'articles':articles, 'liked_articles': liked_articles})
 
-def article_detail(request):
-    return render(request, 'home/article_detail.html')
+def article_detail(request, slug):
+    article = get_object_or_404(Article, slug=slug, is_published=True)
+    
+    related_articles = Article.objects.filter(
+        category=article.category,
+        is_published=True
+    ).exclude(id=article.id)[:4]
+    
+    comments = article.comments.filter(parent=None, is_approved=True)
+    
+    liked_articles = []
+    if request.user.is_authenticated:
+        liked_articles = Like.objects.filter(
+            user=request.user
+        ).values_list('article_id', flat=True)
+    
+    context = {
+        'article': article,
+        'related_articles': related_articles,
+        'liked_articles': list(liked_articles),
+        'comment_count': article.total_comments(),
+        'comments': comments,
+    }
+    
+    return render(request, 'home/article_detail.html', context)
 
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
@@ -129,3 +153,34 @@ def toggle_like(request):
         'liked': liked,
         'total_likes': article.total_likes()
     })
+
+@login_required
+def add_comment(request, article_id):
+    """Add a comment or reply to an article"""
+    article = get_object_or_404(Article, id=article_id, is_published=True)
+    
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        parent_id = request.POST.get('parent_id')
+        
+        if content and content.strip():
+            comment = Comment(
+                article=article,
+                author=request.user,
+                content=content.strip()
+            )
+            
+            if parent_id:
+                try:
+                    parent = Comment.objects.get(id=parent_id, is_approved=True)
+                    # Optional: Limit nesting depth
+                    comment.parent = parent
+                except Comment.DoesNotExist:
+                    pass
+            
+            comment.save()
+            messages.success(request, 'Your comment has been posted!')
+        else:
+            messages.error(request, 'Comment cannot be empty.')
+    
+    return redirect('article_detail', slug=article.slug)

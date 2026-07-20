@@ -1,0 +1,67 @@
+{% load static %}
+<div class="comment" id="comment-{{ comment.id }}">
+    <div class="comment-header">
+        <div class="comment-author">
+            <span class="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </span>
+            {{ comment.author.username }}
+        </div>
+        <div class="comment-date">{{ comment.created_at|timesince }} ago</div>
+    </div>
+    
+    <div class="comment-content">
+        {{ comment.content }}
+    </div>
+    
+    <div class="comment-actions">
+        <span onclick="toggleReplyForm({{ comment.id }})">
+            <i class="fa-regular fa-comment"></i> Reply
+        </span>
+        <span class="like-action">
+            <i class="fa-regular fa-heart"></i> 0
+        </span>
+    </div>
+
+    <!-- Reply Form -->
+    <div class="reply-form" id="reply-form-{{ comment.id }}">
+        <form method="post" action="{% url 'add_comment' article.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <textarea name="content" placeholder="Write a reply..." rows="2" required></textarea>
+            <div class="reply-actions">
+                <button type="submit">Reply</button>
+                <button type="button" class="cancel-btn" onclick="toggleReplyForm({{ comment.id }})">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Nested replies (limited to max_depth) -->
+    {% if depth < max_depth %}
+        {% for reply in comment.get_replies %}
+            <div class="comment-nested">
+                {% include "home/comment_thread.html" with comment=reply depth=depth|add:1 max_depth=max_depth %}
+            </div>
+        {% endfor %}
+    {% else %}
+        {% if comment.get_replies %}
+            <div class="comment-nested" style="border-left-color: #cbd5e1;">
+                <div style="padding: 0.5rem 0; font-size: 0.85rem; color: #94a3b8;">
+                    <i class="fa-regular fa-comment"></i> 
+                    <a href="#" 
+                       onclick="toggleReplies({{ comment.id }}); return false;" 
+                       style="color: #0ea5e9; text-decoration: none; cursor: pointer;">
+                       View {{ comment.get_replies.count }} more replies
+                    </a>
+                </div>
+                <div id="hidden-replies-{{ comment.id }}" style="display: none;">
+                    {% for reply in comment.get_replies %}
+                        <div class="comment-nested" style="border-left-color: #cbd5e1; margin-left: 0;">
+                            {% include "home/comment_thread.html" with comment=reply depth=depth|add:1 max_depth=max_depth|add:1 %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

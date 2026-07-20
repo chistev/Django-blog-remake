@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article title will go here</title>
+    <title>{{ article.title }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -107,7 +108,7 @@
             color: #334155;
         }
 
-        img {
+        .article-body img {
             width: 100%;
             margin-bottom: 1.5rem;
         }
@@ -140,6 +141,36 @@
             justify-content: start;
             padding: 0.5rem;
             margin: 1rem 0 1rem 0;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .like-btn:hover {
+            color: #ef4444;
+        }
+
+        .like-btn.liked {
+            color: #ef4444;
+        }
+
+        .like-btn.liked:hover {
+            color: #dc2626;
+        }
+
+        .like-btn.liked i {
+            animation: heartPop 0.3s ease;
+        }
+
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
 
         .fa-thumbs-up {
@@ -187,54 +218,287 @@
             transform: translateY(-6px);
         }
 
+        .related-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .related-card h4 a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .related-card h4 a:hover {
+            color: #0ea5e9;
+        }
+
+        /* Comment Thread Styles */
+        .comment-thread {
+            margin-bottom: 1rem;
+        }
+
         .comment {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border-radius: 1rem;
-            margin: 1rem;
-            padding: 2rem;
-            width: 100%
+            padding: 1.5rem;
+            width: 100%;
+            background: white;
+            border: 1px solid #f1f5f9;
+            transition: border-color 0.2s;
+        }
+
+        .comment:hover {
+            border-color: #e2e8f0;
         }
 
         .comment-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .comment-author {
             font-weight: 600;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-author .user-icon {
+            width: 28px;
+            height: 28px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #475569;
         }
 
         .comment-date {
-            color: #64748b;
-            font-size: 0.9rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .comment-content {
+            margin-top: 0.75rem;
+            color: #334155;
+            line-height: 1.6;
         }
 
         .comment-actions {
             margin-top: 0.8rem;
             display: flex;
             gap: 1.2rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .comment-actions span {
             cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .comment-actions span:hover {
+            color: #0ea5e9;
+        }
+
+        .comment-actions .like-action:hover {
+            color: #ef4444;
+        }
+
+        /* Nested comments with left border */
+        .comment-nested {
+            margin-left: 2rem;
+            margin-top: 0.75rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .comment-nested .comment {
+            border-left: none;
+            box-shadow: none;
+            padding: 1rem 0;
+        }
+
+        .comment-nested .comment:not(:last-child) {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .comment-nested .comment:last-child {
+            padding-bottom: 0;
+        }
+
+        /* Reply form */
+        .reply-form {
+            display: none;
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 0.75rem;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .reply-form textarea:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .reply-form .reply-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .reply-form .reply-actions button {
+            padding: 0.5rem 1.5rem;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .reply-form .reply-actions button:hover {
+            background: #1e293b;
+        }
+
+        .reply-form .reply-actions .cancel-btn {
+            background: transparent;
+            color: #94a3b8;
+            padding: 0.5rem 1rem;
+        }
+
+        .reply-form .reply-actions .cancel-btn:hover {
+            background: #f1f5f9;
             color: #64748b;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            margin: 1rem 1rem 0 1rem;
-            padding: 1rem 1rem 0 1rem;
+        /* Main comment form */
+        .main-comment-form {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f1f5f9;
         }
 
-        form textarea {
+        .main-comment-form textarea {
+            width: 100%;
             padding: 1rem;
             height: 5rem;
-            width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .main-comment-form textarea:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .main-comment-form .form-actions {
+            margin-top: 0.75rem;
+        }
+
+        .main-comment-form .form-actions button {
+            padding: 0.75rem 2rem;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .main-comment-form .form-actions button:hover {
+            background: #1e293b;
+        }
+
+        .main-comment-form .form-actions button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .empty-comments {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+        }
+
+        .empty-comments i {
+            font-size: 3rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .empty-comments p {
+            font-size: 1.1rem;
+        }
+
+        .login-prompt {
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            background: #f8fafc;
             border-radius: 1rem;
+            color: #64748b;
+        }
+
+        .login-prompt a {
+            color: #0ea5e9;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .load-more-container button {
+            padding: 0.5rem 2rem;
+            background: transparent;
+            color: #0ea5e9;
+            border: 1px solid #0ea5e9;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .load-more-container button:hover {
+            background: #0ea5e9;
+            color: white;
         }
 
         footer {
@@ -243,7 +507,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            margin-top: 2rem;
         }
 
         .footer-section h4 {
@@ -261,15 +526,24 @@
         .social-icons a {
             font-size: 1.5rem;
             color: white;
+            transition: color 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: #0ea5e9;
         }
 
         .footer-section p {
             margin-top: 1rem;
             color: #64748b;
             font-size: 0.95rem;
-
         }
 
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 1rem 0;
+        }
 
         @media (max-width:900px) {
             .hero-content {
@@ -282,11 +556,7 @@
 
             .article-container {
                 width: 90%;
-                padding: 2rem 1.5rem
-            }
-
-            body {
-                background-color: red;
+                padding: 2rem 1.5rem;
             }
 
             .related-grid {
@@ -294,10 +564,9 @@
                 width: 90%;
             }
 
-            form {
-                margin: 1.5rem 0 0 0;
-                padding: 1.5rem 0 0 0;
-                width: 100%;
+            .comment-nested {
+                margin-left: 1rem;
+                padding-left: 0.75rem;
             }
         }
 
@@ -307,8 +576,18 @@
                 width: 90%;
             }
 
-            body {
-                background-color: green;
+            .comment-nested {
+                margin-left: 0.5rem;
+                padding-left: 0.5rem;
+            }
+
+            .comment {
+                padding: 1rem;
+            }
+
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -318,140 +597,119 @@
     <header>
         <nav class="navbar">
             <div class="home">
-                <a href="#">HOME</a>
+                <a href="/">HOME</a>
             </div>
             <ul class="nav-links">
+                {% if user.is_authenticated %}
+                <li><a href="#"><i class="fa-solid fa-user"></i>Hi, {{ user.username }}</a></li>
+                <li>
+                    <form method="post" action="{% url 'account:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">LOG OUT</button>
+                    </form>
+                </li>
+                {% else %}
                 <li><a href="#"><i class="fa-solid fa-user"></i>Hi, stranger</a></li>
-                <li><a href="#">LOG IN</a></li>
+                <li><a href="{% url 'account:login' %}">LOG IN</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <a href="">Music & Entertainment</a>
-            <h1>Sean 'Diddy' Combs: Singer Cassie accuses rap mogul of rape and abuse</h1>
-            <h3>By Chistev Staff • November 17, 2023 • 8 min read</h3>
+            <a href="{{ article.category.get_absolute_url }}">{{ article.category }} </a>
+            <h1>{{ article.title }} </h1>
+            <h3>By Chistev • {{ article.published_date|date:"F d, Y" }}</h3>
         </div>
     </section>
 
     <div class="article-container">
         <article class="article-body">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit ab minus ducimus, consectetur modi in
-                culpa. Quos earum ratione, et, corporis saepe recusandae error obcaecati rerum repudiandae dicta eveniet
-                est?</p>
-
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste facilis, beatae quo officiis consequuntur
-                ducimus voluptatibus cum, sapiente eaque, totam cupiditate ad eos in commodi velit labore! In eos
-                accusantium delectus debitis, provident quas illo possimus aspernatur quae dolores dicta!</p>
-
-            <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="casie and diddy">
-
-            <h2>The Allegations</h2>
-            <p>The lawsuit details multiple disturbing incidents, including an alleged rape in 2018 after Cassie
-                attempted to leave the relationship. Cassie claims Combs subjected her to years of control, including
-                forcing her to participate in sexual activities with others while he watched.</p>
-
-            <blockquote>
-                "I hope that by sharing my story, I can help others who have faced similar situations and encourage them
-                to speak up." — Cassie Ventura
-            </blockquote>
-
+            {{ article.content|safe }}
             <hr>
 
             <div class="like-button">
-                <button><i class="fa-solid fa-thumbs-up"></i>248 likes</button>
+                <button class="like-btn {% if user.is_authenticated and article.id in liked_articles %}liked{% endif %}"
+                    data-article-id="{{ article.id }}" {% if not user.is_authenticated %}
+                    onclick="window.location.href='{% url 'account:login' %}?next={{ request.path }}'" {% endif %}>
+                    <i class="fa-solid fa-heart"></i>
+                    <span class="like-count">{{ article.total_likes }}</span> likes
+                </button>
             </div>
 
             <hr>
-
         </article>
-
     </div>
+
     <div class="category-section">
         <div class="section-header">
-            <h3>More in Music & Entertainment</h3>
-            <a href="#">View All Articles →</a>
+            <h3>More in {{ article.category }}</h3>
+            <a href="{{ article.category.get_absolute_url }}">View All Articles →</a>
         </div>
         <div class="related-grid">
+            {% for related in related_articles %}
             <div class="related-card">
-                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
+                {% if related.image %}
+                <img src="{{ related.image.url }}" alt="{{ related.title }}">
+                {% elif related.image_url %}
+                <img src="{{ related.image_url }}" alt="{{ related.title }}">
+                {% else %}
+                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="{{ related.title }}">
+                {% endif %}
                 <div style="padding: 0 1rem 1rem 1rem;">
-                    <h4>The Evolution of Hip-Hop in 2025</h4>
-                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
+                    <h4><a href="{{ related.get_absolute_url }}">{{ related.title }}</a></h4>
+                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">{{ related.published_date|date:"M d, Y" }}</p>
                 </div>
-
             </div>
-            <div class="related-card">
-                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
-                <div style="padding: 0 1rem 1rem 1rem;">
-                    <h4>The Evolution of Hip-Hop in 2025</h4>
-                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
-                </div>
-
+            {% empty %}
+            <div class="related-card" style="grid-column: 1 / -1; padding: 2rem; text-align: center;">
+                <p style="color: #64748b;">No more articles in this category yet.</p>
             </div>
-            <div class="related-card">
-                <img src="https://cdn.stocksnap.io/img-thumbs/960w/blog-text_AWFJEGJAMS.jpg" alt="">
-                <div style="padding: 0 1rem 1rem 1rem;">
-                    <h4>The Evolution of Hip-Hop in 2025</h4>
-                    <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.4rem;">6 min read</p>
-                </div>
-
-            </div>
-
-
-
+            {% endfor %}
         </div>
     </div>
 
+    <!-- Comments Section -->
     <div class="article-container">
-        <h3 style="font-size: 1.5rem;"><i class="fa-solid fa-comment"></i> 18 Comments</h3>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-comment"></i> 
+            {{ comment_count }} Comment{{ comment_count|pluralize }}
+        </h3>
 
-        <div class="comment">
-            <div class="comment-header">
-                <div class="comment-author">Alex Rivera</div>
-                <div class="comment-date">2 hours ago</div>
-            </div>
-            <p style="margin-top: 1rem;">This is heartbreaking. The music industry really needs more accountability.
-                Cassie is incredibly brave for coming forward.</p>
-            <div class="comment-actions">
-                <span>Reply</span>
-                <span>❤️ 12</span>
-            </div>
-
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="comment-author">Jordan Kim</div>
-                    <div class="comment-date">1 hour ago</div>
+        <!-- Threaded Comments -->
+        <div class="comment-thread">
+            {% for comment in comments %}
+                <!-- Include the comment thread template -->
+                {% include "home/comment_thread.html" with comment=comment depth=0 max_depth=3 %}
+            {% empty %}
+                <div class="empty-comments">
+                    <i class="fa-regular fa-comment"></i>
+                    <p>No comments yet. Be the first to share your thoughts!</p>
                 </div>
-                <p style="margin-top: 1rem;">Completely agree. This kind of behavior has been tolerated for far too
-                    long.</p>
-                <div class="comment-actions">
-                    <span>Reply</span>
-                    <span>❤️ 2</span>
-                </div>
-            </div>
-        </div>
-        <div class="comment">
-            <div class="comment-header">
-                <div class="comment-author">Sam Taylor</div>
-                <div class="comment-date">Yesterday</div>
-            </div>
-            <p style="margin-top: 1rem;">Hope the truth comes out fully. No one should have that much power over another
-                person.</p>
-            <div class="comment-actions">
-                <span>Reply</span>
-                <span>❤️ 5</span>
-            </div>
+            {% endfor %}
         </div>
 
-        <form>
-            <h3>Leave a comment</h3>
-            <textarea placeholder="What are your thoughts?"></textarea><br>
-            <button
-                style="margin-top: 1rem; padding: 0.9rem 2rem; background: #1f2937; color: white; border: none; border-radius: 9999px; cursor: pointer;"
-                type="submit">Post Comment</button>
-        </form>
+        <!-- Main Comment Form -->
+        <div class="main-comment-form">
+            {% if user.is_authenticated %}
+                <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">Leave a comment</h3>
+                <form method="post" action="{% url 'add_comment' article.id %}">
+                    {% csrf_token %}
+                    <textarea name="content" placeholder="What are your thoughts?" required></textarea>
+                    <div class="form-actions">
+                        <button type="submit">Post Comment</button>
+                    </div>
+                </form>
+            {% else %}
+                <div class="login-prompt">
+                    <p>
+                        <a href="{% url 'account:login' %}?next={{ request.path }}">Log in</a> 
+                        to join the discussion.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
     <footer>
@@ -466,7 +724,33 @@
         </div>
     </footer>
 
+    <script src="{% static 'javascript/likes.js' %}"></script>
+    <script>
+    // Toggle reply form visibility
+    function toggleReplyForm(commentId) {
+        const form = document.getElementById('reply-form-' + commentId);
+        if (form.style.display === 'block') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
+    }
 
+    // Toggle hidden replies visibility
+    function toggleReplies(commentId) {
+        const hiddenReplies = document.getElementById('hidden-replies-' + commentId);
+        const link = hiddenReplies.previousElementSibling.querySelector('a');
+        
+        if (hiddenReplies.style.display === 'none') {
+            hiddenReplies.style.display = 'block';
+            link.textContent = 'Hide replies';
+        } else {
+            hiddenReplies.style.display = 'none';
+            const replyCount = hiddenReplies.querySelectorAll('.comment-nested').length;
+            link.textContent = 'View ' + replyCount + ' more replies';
+        }
+    }
+</script>
 </body>
 
 </html>
